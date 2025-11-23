@@ -1,0 +1,39 @@
+slack:
+  label: Slack
+  permalink: /slack
+  description: Slack platform integrations and development
+
+mcp:
+  label: MCP
+  permalink: /mcp
+  description: Model Context Protocol (MCP) development and integrations
+
+mcp-server:
+  label: MCP Server
+  permalink: /mcp-server
+  description: MCP Server implementations and architecture
+
+message-queue:
+  label: Message Queue
+  permalink: /message-queue
+  description: Message queue systems, backends, and processing patterns
+
+plugin:
+  label: Plugin
+  permalink: /plugin
+  description: Plugin development, architecture, and best practices
+
+template:
+  label: Template
+  permalink: /template
+  description: Project templates, boilerplates, and starter kits
+
+python:
+  label: Python
+  permalink: /python
+  description: Python programming and development
+
+developer-experience:
+  label: Developer Experience
+  permalink: /developer-experience
+  description: Tools and practices that improve developer productivity and happiness
