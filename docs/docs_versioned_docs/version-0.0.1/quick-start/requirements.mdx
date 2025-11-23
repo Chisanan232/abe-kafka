@@ -1,0 +1,168 @@
+---
+id: requirements
+title: Requirements
+sidebar_position: 1
+---
+
+# Requirements
+
+Before developing a message queue service for your application, ensure your development environment meets the following requirements:
+
+## System Requirements
+
+- **Operating System**: Linux, macOS, or Windows
+- **Memory**: Minimum 1GB RAM (2GB+ recommended for development)
+- **Disk Space**: Minimum 1GB for full development environment
+- **Internet Connection**: Required for downloading dependencies and testing with external queue services
+
+## Core Prerequisites
+
+### Python Version
+
+- **Python**: Version 3.12 or higher (up to 3.13 supported)
+- **Recommended**: Python 3.13 for optimal compatibility with async features
+
+:::tip Python Installation
+If you don't have Python installed:
+- **macOS**: Use `brew install python` or download from [python.org](https://www.python.org/)
+- **Linux**: Use your package manager (e.g., `apt install python3.13`)
+- **Windows**: Download from [python.org](https://www.python.org/) or use `winget install Python.Python.3.13`
+:::
+
+### Package Manager: uv (Required)
+
+This template is specifically designed for **[uv]** - a fast, modern Python package manager written in Rust.
+
+**Installation:**
+```bash
+# macOS and Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# Alternative: via pip
+pip install uv
+```
+
+**Why uv?**
+- ⚡ **10-100x faster** than pip/poetry for dependency resolution
+- 🔒 **Deterministic builds** with lockfile support  
+- 🛠️ **All-in-one tool** for project management, virtual environments, and Python installation
+- 📦 **Drop-in replacement** for pip with better dependency resolution
+
+[uv]: https://docs.astral.sh/uv/
+
+### Version Control
+
+- **Git**: Version 2.20 or higher
+- **GitHub Account**: For template creation and repository management (recommended)
+
+## Application Integration
+
+### Understanding the Target Application
+
+To develop message queue services, you should understand:
+
+- **Application Runtime**: The system that receives and dispatches events through your queue service
+- **MessageQueueBackend Protocol**: The interface your service must implement
+- **Plugin Discovery**: How the runtime finds and loads your message queue backend
+
+### Development Dependencies
+
+Your plugin will integrate with:
+
+```toml
+# Example: dependencies required by your application
+dependencies = [
+    "abstract-backend",  # Core runtime (replace with your application library)
+]
+```
+
+## Message Queue Services (Optional)
+
+Depending on your queue backend implementation, you may need access to:
+
+### Local Development Services
+- **Redis**: `brew install redis` (macOS) or `apt install redis-server` (Linux)
+- **RabbitMQ**: `brew install rabbitmq` (macOS) or `apt install rabbitmq-server` (Linux)
+- **Docker**: For containerized queue services
+
+### Cloud Services
+- **AWS Account**: For SQS, SNS integration
+- **Google Cloud**: For Pub/Sub integration
+- **Azure Account**: For Service Bus integration
+
+## Development Tools (Auto-configured)
+
+These tools are automatically set up in the template:
+
+### Testing & Quality Assurance
+- **pytest**: Async-capable testing framework
+- **pytest-cov**: Code coverage reporting
+- **pytest-asyncio**: Async test support
+- **mypy**: Static type checking
+- **black**: Code formatting
+- **pylint**: Code linting
+
+### Documentation
+- **Docusaurus**: Documentation site generation
+- **API documentation**: Auto-generated from docstrings
+
+### CI/CD
+- **GitHub Actions**: Automated testing and publishing
+- **Pre-commit hooks**: Code quality enforcement
+
+## Environment Setup Verification
+
+After installing the prerequisites, verify your setup:
+
+```bash
+# Check Python version
+python --version  # Should be 3.12+
+
+# Check uv installation
+uv --version  # Should show uv version
+
+# Check Git
+git --version  # Should be 2.20+
+
+# Verify you can create virtual environments
+uv venv test-env
+source test-env/bin/activate  # Linux/macOS
+# or test-env\Scripts\activate  # Windows
+deactivate
+rm -rf test-env
+```
+
+## Next Steps
+
+Once your environment meets these requirements, you're ready to:
+
+1. 📋 **[Install the template](./installation)** - Clone and set up your plugin project
+2. 🔧 **[Implement your backend](./how-to-run)** - Build your message queue logic
+3. 🧪 **Test your service** - Validate integration with your application
+4. 🚀 **Publish your package** - Share with the community
+
+## Common Issues & Solutions
+
+### Python Version Issues
+```bash
+# If you have multiple Python versions
+uv python install 3.13
+uv python pin 3.13
+```
+
+### uv Installation Issues
+```bash
+# If uv command not found after installation
+source ~/.bashrc  # or restart terminal
+```
+
+### Permission Issues
+```bash
+# If you get permission errors
+uv venv --system-site-packages
+```
+
+Ready to proceed? Let's move on to [installation](./installation)!
