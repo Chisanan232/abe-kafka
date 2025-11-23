@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "abe-mq-template"
-version = "0.0.0"
+version = "0.0.1"
 description = "📮 A message queue component plugin implementation for abstract backend library."
 authors = [{ name = "Chisanan232", email = "chi10211201@cycu.org.tw" }]
 requires-python = ">=3.12,<3.14"
