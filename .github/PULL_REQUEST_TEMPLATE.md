@@ -37,13 +37,10 @@
     * [ ] 🍀 Improving something (maybe performance, code quality, security, etc.)
     * [ ] 🚀 Release
 * Scopes:
-    * [ ] ✍️ Command line interface
     * [ ] 💼 Core feature
-        * [ ] 🕸️ Web server
-        * [ ] 🤖 MCP server
-        * [ ] 🪡 API client
-        * [ ] 🫀 Data model
-    * [ ] 🎨 UI/UX (maybe command line interface, etc.)
+        * [ ] Producer
+        * [ ] Consumer
+        * [ ] Others
     * [ ] ⛑️ Error handling
     * [ ] 🧪 Testing
         * [ ] 🧪 Unit testing
