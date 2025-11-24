@@ -11,51 +11,8 @@ This document covers the specialized CI workflows that support specific aspects 
 
 The project includes several specialized CI workflows that handle specific operational tasks:
 
-- **🐳 Docker CI** - Container image building and testing
-- **📋 DockerHub README CI** - Repository description synchronization
 - **📚 Documentation Build Check** - Validates documentation builds on PRs and branch changes
 - **🤖 Documentation Auto-Approve & Auto-Merge** - Streamlined docs updates
-
----
-
-## Docker CI
-
-[![docker-ci](https://github.com/Chisanan232/Template-Python-UV-Project/actions/workflows/docker-ci.yml/badge.svg)](https://github.com/Chisanan232/Template-Python-UV-Project/actions/workflows/docker-ci.yml)
-
-The `docker-ci.yml` workflow tests Docker image building and functionality.
-
-**Triggers:**
-- **Push to master**: When Docker-related files change
-  - GitHub Actions workflow files
-  - Python source code (`src/**/*.py`)
-  - Dockerfile and Docker scripts
-
-**Purpose**: Validates Docker image builds and containerized application functionality.
-
-**Key Features:**
-- Validates Docker image build process
-- Tests containerized application functionality
-- Ensures Docker configuration correctness
-- Separate from the main release Docker builds
-
----
-
-## DockerHub README CI
-
-[![dockerhub-readme-ci](https://github.com/Chisanan232/Template-Python-UV-Project/actions/workflows/dockerhub-readme-ci.yml/badge.svg)](https://github.com/Chisanan232/Template-Python-UV-Project/actions/workflows/dockerhub-readme-ci.yml)
-
-The `dockerhub-readme-ci.yml` workflow updates the Docker Hub repository description.
-
-**Triggers:**
-- **Push to master**: When `README_DOCKERHUB.md` is modified
-- **Workflow file changes**: When the DockerHub README workflow itself is updated
-
-**Purpose**: Keeps Docker Hub repository description synchronized with the documentation.
-
-**Key Features:**
-- Automatic synchronization of Docker Hub repository description
-- Triggered by changes to Docker-specific documentation
-- Maintains consistency between repository and registry documentation
 
 ---
 
@@ -135,8 +92,6 @@ The `docs-automerge.yml` workflow automatically approves and merges pull request
 These additional CI workflows integrate with the main CI/CD system:
 
 ### **Integration Points:**
-- **Docker CI** → Validates containers before release workflows 
-- **DockerHub README** → Ensures registry documentation stays current
 - **Documentation Build Check** → Validates docs builds on PRs to prevent broken deployments
 - **Docs Auto-merge** → Accelerates documentation maintenance
 

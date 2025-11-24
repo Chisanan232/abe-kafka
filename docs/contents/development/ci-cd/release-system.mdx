@@ -15,11 +15,11 @@ The release workflows for this template are now maintained in the centralized re
 [![Release](https://github.com/Chisanan232/abe-kafka/actions/workflows/release.yml/badge.svg)](https://github.com/Chisanan232/abe-kafka/actions/workflows/release.yml)
 [![PyPI version](https://img.shields.io/pypi/v/abe-kafka?label=PyPI&color=306998&logo=pypi)](https://pypi.org/project/abe-kafka/)
 
-Publishes production artifacts (PyPI package, container images, docs) using the centralized `rw_release_complete.yaml` workflow logic.
+Publishes production artifacts (PyPI package and docs) using the centralized `rw_release_complete.yaml` workflow logic.
 
 - **Purpose** – Ship the production-ready version of your project whenever you approve a release.
 - **Effects** – Builds from locked dependencies, signs artifacts (if configured), pushes semantic tags, and updates changelog summaries.
-- **Targets** – PyPI (wheel + sdist), Docker Hub/GHCR images, and the published Docusaurus docs site.
+- **Targets** – PyPI (wheel + sdist) and the published Docusaurus docs site.
 
 ```mermaid
 flowchart LR
@@ -32,7 +32,7 @@ flowchart LR
     trigger["release.yml<br/>(local workflow)"]:::workflow
     reusable["Reusable workflow<br/>rw_release_complete.yaml"]:::workflow
     jobs[Build → Test → Sign → Publish]:::jobs
-    targets[(PyPI · Docker Hub/GHCR · Docs)]:::targets
+    targets[(PyPI · Docs)]:::targets
 
     intent --> trigger --> reusable --> jobs --> targets
 ```
@@ -46,11 +46,11 @@ See the reusable workflow guide for production releases: [rw_release_complete.ya
 [![Release Staging](https://github.com/Chisanan232/abe-kafka/actions/workflows/release-staging.yml/badge.svg)](https://github.com/Chisanan232/abe-kafka/actions/workflows/release-staging.yml)
 [![TestPyPI version](https://img.shields.io/badge/dynamic/json?label=TestPyPI&color=ff6600&query=%24.info.version&url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2Fabe-kafka%2Fjson&logo=pypi)](https://test.pypi.org/project/abe-kafka/)
 
-Creates staging/TestPyPI packages, RC container images, and preview documentation to test releases before production.
+Creates staging/TestPyPI packages and preview documentation to test releases before production.
 
 - **Purpose** – Provide a safe rehearsal of the full release pipeline with artifacts you can share internally.
-- **Effects** – Publishes release-candidate packages, tags container images with `-rc`, and deploys docs to preview channels without touching production identifiers.
-- **Targets** – TestPyPI, staging container registries (Docker Hub/GHCR), and preview docs buckets or branches.
+- **Effects** – Publishes release-candidate packages and deploys docs to preview channels without touching production identifiers.
+- **Targets** – TestPyPI and preview docs buckets or branches.
 
 ```mermaid
 flowchart LR
@@ -63,7 +63,7 @@ flowchart LR
     trigger["release-staging.yml<br/>(local workflow)"]:::workflow
     reusable["Reusable workflow<br/>rw_release_staging_complete.yaml"]:::workflow
     jobs[Build → Tag `-rc` → Publish preview docs]:::jobs
-    targets[(TestPyPI · Staging registries · Preview docs)]:::targets
+    targets[(TestPyPI · Preview docs)]:::targets
 
     intent --> trigger --> reusable --> jobs --> targets
 ```
@@ -106,12 +106,11 @@ Reusable validation workflow details: [rw_release_validation_complete.yaml](http
 ## Overview
 
 - **Centralized logic**: All release orchestration lives in the [reusable workflow repository](https://github.com/Chisanan232/GitHub-Action_Reusable_Workflows-Python).
-- **Multi-target support**: Python packages, container images, and documentation publishing remain available through the shared workflows.
+- **Multi-target support**: Python packages and documentation publishing remain available through the shared workflows.
 - **Configuration-driven**: Child projects configure releases via `intent.yaml`, delegating implementation details to the centralized workflows.
 - **Release targets at a glance**:
   - PyPI for production Python packages
   - TestPyPI for staging/validation builds
-  - Docker Hub and GitHub Container Registry for container images
   - Docusaurus documentation deployments
 
 :::note Learn more
