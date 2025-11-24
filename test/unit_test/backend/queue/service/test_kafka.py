@@ -4,7 +4,7 @@ import asyncio
 import json
 import os
 from types import SimpleNamespace
-from typing import Any
+from typing import Any, Literal, Union, cast
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -94,13 +94,14 @@ class TestKafkaBackendConsume:
         backend = KafkaMessageQueueBackend(bootstrap_servers=["localhost:9092"], topic_pattern="^unit-.*$")
 
         # Build a fake consumer.poll that returns one record then empty then raises CancelledError to end
-        polls = [
+        RecordDict = dict[str, list[SimpleNamespace]]
+        polls: list[Union[RecordDict, Literal["CANCEL"]]] = [
             {"tp1": [SimpleNamespace(value=json.dumps({"a": 1}).encode("utf-8"))]},
-            {},
+            cast(RecordDict, {}),
             "CANCEL",
         ]
 
-        def fake_poll(timeout_ms: int = 1000):
+        def fake_poll(timeout_ms: int = 1000) -> RecordDict:
             if polls:
                 item = polls.pop(0)
                 if item == "CANCEL":
@@ -116,7 +117,7 @@ class TestKafkaBackendConsume:
             return_value=mock_consumer,
         ):
 
-            async def runner():
+            async def runner() -> list[dict[str, Any]]:
                 gen = backend.consume(group="g1")
                 msgs = []
                 try:
@@ -143,7 +144,7 @@ class TestKafkaBackendConsume:
             {"tp2": [SimpleNamespace(value=valid)]},
         ]
 
-        def fake_poll(timeout_ms: int = 1000):
+        def fake_poll(timeout_ms: int = 1000) -> dict[str, list[SimpleNamespace]]:
             if polls:
                 return polls.pop(0)
             raise asyncio.CancelledError()
@@ -156,7 +157,7 @@ class TestKafkaBackendConsume:
             return_value=mock_consumer,
         ):
 
-            async def runner():
+            async def runner() -> list[dict[str, Any]]:
                 gen = backend.consume()
                 msgs = []
                 try:

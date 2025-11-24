@@ -9,7 +9,7 @@ import asyncio
 import json
 import logging
 import os
-from typing import Any, AsyncIterator, Dict, List, Optional
+from typing import Any, AsyncIterator, Dict, List, Optional, Callable, Awaitable, TypeVar
 
 from abe.backends.message_queue.base.protocol import MessageQueueBackend
 from kafka import KafkaConsumer, KafkaProducer
@@ -169,7 +169,9 @@ class KafkaMessageQueueBackend(MessageQueueBackend):
             logger.error("Unable to create Kafka consumer", exc_info=exc)
             raise ConnectionError(f"Unable to create Kafka consumer: {exc}")
 
-    async def _with_retry(self, coro_factory, *, retries: int = 3) -> Any:
+    T = TypeVar("T")
+
+    async def _with_retry(self, coro_factory: Callable[[], Awaitable[T]], *, retries: int = 3) -> T:
         last_exc: Optional[BaseException] = None
         for attempt in range(retries + 1):
             try:
