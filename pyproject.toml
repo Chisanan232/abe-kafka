@@ -31,6 +31,7 @@ classifiers = [
 ]
 dependencies = [
     "abstract-backend>=0.0.1",
+    "kafka-python>=2.0,<3",
 ]
 
 [project.urls]

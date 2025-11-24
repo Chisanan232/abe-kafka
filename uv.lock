@@ -8,6 +8,7 @@ version = "0.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "abstract-backend" },
+    { name = "kafka-python" },
 ]
 
 [package.dev-dependencies]
@@ -27,7 +28,10 @@ pre-commit-ci = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "abstract-backend", specifier = ">=0.0.1" }]
+requires-dist = [
+    { name = "abstract-backend", specifier = ">=0.0.1" },
+    { name = "kafka-python", specifier = ">=2.0,<3" },
+]
 
 [package.metadata.requires-dev]
 dev = [
@@ -329,6 +333,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/1e/82/fa43935523efdfcce6abbae9da7f372b627b27142c3419fcf13bf5b0c397/isort-6.1.0.tar.gz", hash = "sha256:9b8f96a14cfee0677e78e941ff62f03769a06d412aabb9e2a90487b3b7e8d481", size = 824325, upload-time = "2025-10-01T16:26:45.027Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7f/cc/9b681a170efab4868a032631dea1e8446d8ec718a7f657b94d49d1a12643/isort-6.1.0-py3-none-any.whl", hash = "sha256:58d8927ecce74e5087aef019f778d4081a3b6c98f15a80ba35782ca8a2097784", size = 94329, upload-time = "2025-10-01T16:26:43.291Z" },
+]
+
+[[package]]
+name = "kafka-python"
+version = "2.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/27/5c/d3b6d93ed625d2cb0265e6fe0f507be544f6edde577c1b118f42566389bf/kafka_python-2.3.0.tar.gz", hash = "sha256:de65b596d26b5c894f227c35c7d29a65cea8f8a1c4f0f2b4e3e2ea60d503acc8", size = 358391, upload-time = "2025-11-21T00:47:34.078Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4a/db/694fd552295ed091e7418d02b6268ee36092d4c93211136c448fe061fe32/kafka_python-2.3.0-py2.py3-none-any.whl", hash = "sha256:831ba6dff28144d0f1145c874d391f3ebb3c2c3e940cc78d74e83f0183497c98", size = 326260, upload-time = "2025-11-21T00:47:32.561Z" },
 ]
 
 [[package]]
