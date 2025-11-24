@@ -31,6 +31,7 @@ classifiers = [
 ]
 dependencies = [
     "abstract-backend>=0.0.1",
+    "kafka-python>=2.0,<3",
 ]
 
 [project.urls]
@@ -41,7 +42,7 @@ Changelog = "https://chisanan232.github.io/abe-kafka/docs/next/changelog"
 "Project Management" = "https://app.clickup.com/9018752317/v/f/901810146989/90184991515"
 
 [project.entry-points."abe.backends.message_queue.service"]
-mq_name = "abe_plugin.backends.message_queue.service.your_queue_service:YourMessageQueueBackend"
+kafka = "abe_plugin.backends.message_queue.service.abe_kafka:KafkaMessageQueueBackend"
 
 [dependency-groups]
 dev = [
