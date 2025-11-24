@@ -5,15 +5,15 @@ sidebar_position: 3
 
 # Release System
 
-[![GitHub release](https://img.shields.io/github/v/release/Chisanan232/Template-Python-UV-Project?display_name=tag&color=24292e&logo=github)](https://github.com/Chisanan232/Template-Python-UV-Project/releases)
+[![GitHub release](https://img.shields.io/github/v/release/Chisanan232/abe-kafka?display_name=tag&color=24292e&logo=github)](https://github.com/Chisanan232/abe-kafka/releases)
 
 The release workflows for this template are now maintained in the centralized repository `Chisanan232/GitHub-Action_Reusable_Workflows-Python`. This project consumes those reusable workflows for production, validation, and staging releases while keeping only minimal configuration locally.
 
 ## Release workflows
 
 ### Production release (`release.yml`)
-[![Release](https://github.com/Chisanan232/Template-Python-UV-Project/actions/workflows/release.yml/badge.svg)](https://github.com/Chisanan232/Template-Python-UV-Project/actions/workflows/release.yml)
-[![PyPI version](https://img.shields.io/pypi/v/test-python-uv-project-template?label=PyPI&color=306998&logo=pypi)](https://pypi.org/project/test-python-uv-project-template/)
+[![Release](https://github.com/Chisanan232/abe-kafka/actions/workflows/release.yml/badge.svg)](https://github.com/Chisanan232/abe-kafka/actions/workflows/release.yml)
+[![PyPI version](https://img.shields.io/pypi/v/abe-kafka?label=PyPI&color=306998&logo=pypi)](https://pypi.org/project/abe-kafka/)
 
 Publishes production artifacts (PyPI package, container images, docs) using the centralized `rw_release_complete.yaml` workflow logic.
 
@@ -43,8 +43,8 @@ See the reusable workflow guide for production releases: [rw_release_complete.ya
 :::
 
 ### Release staging (`release-staging.yml`)
-[![Release Staging](https://github.com/Chisanan232/Template-Python-UV-Project/actions/workflows/release-staging.yml/badge.svg)](https://github.com/Chisanan232/Template-Python-UV-Project/actions/workflows/release-staging.yml)
-[![TestPyPI version](https://img.shields.io/badge/dynamic/json?label=TestPyPI&color=ff6600&query=%24.info.version&url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2Ftest-python-uv-project-template%2Fjson&logo=pypi)](https://test.pypi.org/project/test-python-uv-project-template/)
+[![Release Staging](https://github.com/Chisanan232/abe-kafka/actions/workflows/release-staging.yml/badge.svg)](https://github.com/Chisanan232/abe-kafka/actions/workflows/release-staging.yml)
+[![TestPyPI version](https://img.shields.io/badge/dynamic/json?label=TestPyPI&color=ff6600&query=%24.info.version&url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2Fabe-kafka%2Fjson&logo=pypi)](https://test.pypi.org/project/abe-kafka/)
 
 Creates staging/TestPyPI packages, RC container images, and preview documentation to test releases before production.
 
@@ -74,7 +74,7 @@ Reusable staging workflow reference: [rw_release_staging_complete.yaml](https://
 :::
 
 ### Release validation (`release-validate.yml`)
-[![Release Validation](https://github.com/Chisanan232/Template-Python-UV-Project/actions/workflows/release-validate.yml/badge.svg)](https://github.com/Chisanan232/Template-Python-UV-Project/actions/workflows/release-validate.yml)
+[![Release Validation](https://github.com/Chisanan232/abe-kafka/actions/workflows/release-validate.yml/badge.svg)](https://github.com/Chisanan232/abe-kafka/actions/workflows/release-validate.yml)
 
 Dry-runs the release pipeline for pull requests, verifying builds and security checks without publishing artifacts.
 

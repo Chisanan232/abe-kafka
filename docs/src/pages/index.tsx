@@ -34,7 +34,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to={stableDocsPath}>
-            Abstract Backend Template Documentation
+            ABE-Kafka Documentation
           </Link>
         </div>
       </div>
