@@ -5,15 +5,15 @@ import remarkGfm from 'remark-gfm';
 import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 
 const config: Config = {
-  title: 'Abstract Backend Implementation Template',
-  tagline: '🐍 A reference implementation template for abstract-backend queue services.',
+  title: 'abe-kafka',
+  tagline: '🔗 A backend component as message queue component by Kafka.',
   favicon: 'img/python_logo_icon.png',
 
   // Set the production url of your site here
   url: 'https://chisanan232.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
-  baseUrl: '/abstract-backend-implementation-template/',
-  projectName: 'abstract-backend-implementation-template',
+  baseUrl: '/abe-kafka/',
+  projectName: 'abe-kafka',
   organizationName: 'Chisanan232',
   trailingSlash: false,
 
@@ -66,7 +66,7 @@ const config: Config = {
         showLastUpdateTime: true,
         showLastUpdateAuthor: true,
         editUrl:
-          'https://github.com/Chisanan232/abstract-backend-implementation-template/tree/master/docs/',
+          'https://github.com/Chisanan232/abe-kafka/tree/master/docs/',
         versions: {
           current: {
             label: 'Next',
@@ -90,7 +90,7 @@ const config: Config = {
         showLastUpdateTime: true,
         showLastUpdateAuthor: true,
         editUrl:
-          'https://github.com/Chisanan232/abstract-backend-implementation-template/tree/master/docs/',
+          'https://github.com/Chisanan232/abe-kafka/tree/master/docs/',
         versions: {
           current: {
             label: 'Next',
@@ -111,7 +111,7 @@ const config: Config = {
         routeBasePath: 'blog',
         showReadingTime: true,
         editUrl:
-          'https://github.com/Chisanan232/abstract-backend-implementation-template/tree/master/docs/',
+          'https://github.com/Chisanan232/abe-kafka/tree/master/docs/',
       },
     ],
     [
@@ -120,7 +120,7 @@ const config: Config = {
         // Options for docusaurus-search-local
         hashed: true,
         language: ['en'],
-        docsRouteBasePath: ['/abstract-backend-implementation-template'],
+        docsRouteBasePath: ['/abe-kafka'],
         docsDir: ['./contents/document', './contents/development'],
         blogDir: ['./contents/blog'],
         highlightSearchTermsOnTargetPage: true,
@@ -141,7 +141,7 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/python_logo_icon.png',
     navbar: {
-      title: 'Abstract Backend Template',
+      title: 'abe-kafka',
       logo: {
         alt: 'My Site Logo',
         src: 'img/python_logo_icon.png',
@@ -182,7 +182,7 @@ const config: Config = {
           dropdownItemsAfter: [],
         },
         {
-          href: 'https://github.com/Chisanan232/abstract-backend-implementation-template',
+          href: 'https://github.com/Chisanan232/abe-kafka',
           label: 'GitHub',
           position: 'right',
         },
@@ -213,11 +213,11 @@ const config: Config = {
           items: [
             {
               label: 'GitHub Issues',
-              href: 'https://github.com/Chisanan232/abstract-backend-implementation-template/issues',
+              href: 'https://github.com/Chisanan232/abe-kafka/issues',
             },
             {
               label: 'GitHub Discussions',
-              href: 'https://github.com/Chisanan232/abstract-backend-implementation-template/discussions',
+              href: 'https://github.com/Chisanan232/abe-kafka/discussions',
             },
           ],
         },
@@ -226,12 +226,12 @@ const config: Config = {
           items: [
             {
               label: 'GitHub Repository',
-              href: 'https://github.com/Chisanan232/abstract-backend-implementation-template',
+              href: 'https://github.com/Chisanan232/abe-kafka',
             },
           ],
         },
       ],
-      copyright: `Copyright ${new Date().getFullYear()} - PRESENT, Python-uv-project-template is owned by <a href="https://github.com/Chisanan232">@Chisanan232</a>.<br />Built with <a href="https://docusaurus.io/">Docusaurus</a>.`,
+      copyright: `Copyright ${new Date().getFullYear()} - PRESENT, abe-kafka is owned by <a href="https://github.com/Chisanan232">@Chisanan232</a>.<br />Built with <a href="https://docusaurus.io/">Docusaurus</a>.`,
     },
     prism: {
       theme: prismThemes.github,
@@ -247,7 +247,7 @@ const config: Config = {
       tagName: 'link',
       attributes: {
         rel: 'canonical',
-        href: 'https://chisanan232.github.io/abstract-backend-implementation-template/docs/introduction',
+        href: 'https://chisanan232.github.io/abe-kafka/docs/next/introduction',
       },
     },
   ],
