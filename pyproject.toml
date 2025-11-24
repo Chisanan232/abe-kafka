@@ -34,11 +34,11 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Chisanan232/abstract-backend-implementation-template"
-Repository = "https://github.com/Chisanan232/abstract-backend-implementation-template"
-Documentation = "https://chisanan232.github.io/abstract-backend-implementation-template/"
-Changelog = "https://chisanan232.github.io/abstract-backend-implementation-template/docs/next/changelog"
-"Project Management" = "https://app.clickup.com/9018752317/v/f/90185744047/90184991515"
+Homepage = "https://github.com/Chisanan232/abe-kafka"
+Repository = "https://github.com/Chisanan232/abe-kafka"
+Documentation = "https://chisanan232.github.io/abe-kafka/"
+Changelog = "https://chisanan232.github.io/abe-kafka/docs/next/changelog"
+"Project Management" = "https://app.clickup.com/9018752317/v/f/901810146989/90184991515"
 
 [project.entry-points."abe.backends.message_queue.service"]
 mq_name = "abe_plugin.backends.message_queue.service.your_queue_service:YourMessageQueueBackend"
