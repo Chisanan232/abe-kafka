@@ -200,6 +200,7 @@ class KafkaMessageQueueBackend(MessageQueueBackend):
             json.dumps(payload)
 
             async def _op() -> Any:
+                assert self._producer is not None, "Producer not started"
                 future = self._producer.send(key, payload)
                 # Wait for delivery in a thread to avoid blocking loop
                 return await asyncio.to_thread(future.get, 30)
