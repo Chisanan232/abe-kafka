@@ -141,7 +141,7 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/python_logo_icon.png',
     navbar: {
-      title: 'ABE-Kafka',
+      title: 'abe-kafka',
       logo: {
         alt: 'My Site Logo',
         src: 'img/python_logo_icon.png',

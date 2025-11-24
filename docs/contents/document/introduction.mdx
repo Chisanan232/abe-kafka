@@ -4,17 +4,17 @@ title: Introduction
 sidebar_position: 1
 ---
 
-# Abstract Backend Implementation Template
+# Kafka Message Queue Backend for Abstract Backend
 
-Welcome to the **Abstract Backend Implementation Template** – a comprehensive reference for building message queue service implementations that integrate with the [abstract-backend](https://github.com/Chisanan232/abstract-backend) project.
+Welcome to **abe-kafka** — a Kafka-based message queue component that integrates with the [abstract-backend](https://github.com/Chisanan232/abstract-backend) project.
 
-## What is This Template?
+## What is abe-kafka?
 
-This template provides a production-ready foundation for creating custom message queue service implementations that integrate seamlessly with the abstract-backend event processing system. It enables developers to quickly deliver queue-enabled services as distributable Python packages that can be installed and reused without additional integration friction.
+This project provides a production-ready Kafka-backed message queue implementation that integrates seamlessly with the abstract-backend event processing system. It enables developers to quickly deliver queue-enabled services as distributable Python packages that can be installed and reused without additional integration friction.
 
 ## Abstract Backend Integration
 
-The [abstract-backend](https://github.com/Chisanan232/abstract-backend) project is designed with a flexible, plugin-based architecture that supports event dispatching through customizable queue services. This template helps you create queue providers that users can install via `pip install <your-abstract-backend-queue-service>` and enable immediately with minimal configuration.
+The [abstract-backend](https://github.com/Chisanan232/abstract-backend) project is designed with a flexible, plugin-based architecture that supports event dispatching through customizable queue services. This project provides a Kafka queue provider that users can install via `pip install abe-kafka` and enable immediately with minimal configuration.
 
 ### Event Flow Architecture
 
@@ -147,7 +147,7 @@ async def consume(self, key: str) -> AsyncIterator[Dict[str, Any]]:
 
 ## Supported Queue Types
 
-This template can be adapted for various message queue systems:
+This project integrates Apache Kafka. The following queue types are listed to illustrate the broader abstract-backend ecosystem:
 
 ### **In-Memory Queues**
 - **Python Queue**: For development and testing
@@ -192,7 +192,7 @@ python -m abstract_backend.runtime
 
 ### **Microservices Architecture**
 ```bash
-pip install abstract-backend-kafka-service
+pip install abe-kafka
 MESSAGE_QUEUE_BACKEND=kafka
 KAFKA_BROKERS=kafka1:9092,kafka2:9092
 python -m abstract_backend.runtime
@@ -208,7 +208,7 @@ python -m abstract_backend.runtime
 
 ## Getting Started
 
-This template includes everything you need to build a professional message queue plugin:
+This project includes everything you need to build a professional message queue plugin:
 
 ### ✅ **Core Implementation**
 - Sample memory-based backend implementation
