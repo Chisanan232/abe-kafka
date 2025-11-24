@@ -17,7 +17,6 @@ from typing import (
     Dict,
     List,
     Optional,
-    TypeVar,
 )
 
 from abe.backends.message_queue.base.protocol import MessageQueueBackend
