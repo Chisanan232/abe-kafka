@@ -12,9 +12,7 @@ import os
 from typing import Any, AsyncIterator, Dict, List, Optional
 
 from abe.backends.message_queue.base.protocol import MessageQueueBackend
-
 from kafka import KafkaConsumer, KafkaProducer
-
 
 logger = logging.getLogger(__name__)
 
@@ -180,7 +178,7 @@ class KafkaMessageQueueBackend(MessageQueueBackend):
                 last_exc = exc
                 if attempt == retries:
                     break
-                sleep_for = 2 ** attempt
+                sleep_for = 2**attempt
                 logger.warning(
                     "Kafka operation failed; retrying",
                     extra={"attempt": attempt + 1, "sleep_seconds": sleep_for},

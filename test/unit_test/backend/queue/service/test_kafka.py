@@ -1,10 +1,10 @@
 """Unit tests for KafkaMessageQueueBackend using kafka-python with async wrappers."""
 
 import asyncio
-import os
 import json
+import os
 from types import SimpleNamespace
-from typing import Any, Dict
+from typing import Any
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -73,8 +73,10 @@ class TestKafkaBackendPublish:
         mock_producer = MagicMock()
         # Simulate network error in future.get
         mock_future = MagicMock()
+
         def raise_err(timeout: Any = None) -> Any:  # noqa: ANN401
             raise RuntimeError("broker down")
+
         mock_future.get.side_effect = raise_err
         mock_producer.send.return_value = mock_future
 
@@ -113,6 +115,7 @@ class TestKafkaBackendConsume:
             "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
             return_value=mock_consumer,
         ):
+
             async def runner():
                 gen = backend.consume(group="g1")
                 msgs = []
@@ -152,6 +155,7 @@ class TestKafkaBackendConsume:
             "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
             return_value=mock_consumer,
         ):
+
             async def runner():
                 gen = backend.consume()
                 msgs = []
@@ -176,12 +180,15 @@ class TestKafkaBackendClose:
         mock_producer = MagicMock()
         mock_consumer = MagicMock()
 
-        with patch(
-            "abe_plugin.backends.message_queue.service.abe_kafka.KafkaProducer",
-            return_value=mock_producer,
-        ), patch(
-            "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
-            return_value=mock_consumer,
+        with (
+            patch(
+                "abe_plugin.backends.message_queue.service.abe_kafka.KafkaProducer",
+                return_value=mock_producer,
+            ),
+            patch(
+                "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
+                return_value=mock_consumer,
+            ),
         ):
             # Start both
             await backend._ensure_producer()
@@ -216,13 +223,16 @@ class TestKafkaBackendAuthConfig:
         mock_producer = MagicMock()
         mock_consumer = MagicMock()
 
-        with patch(
-            "abe_plugin.backends.message_queue.service.abe_kafka.KafkaProducer",
-            return_value=mock_producer,
-        ) as prod_cls, patch(
-            "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
-            return_value=mock_consumer,
-        ) as cons_cls:
+        with (
+            patch(
+                "abe_plugin.backends.message_queue.service.abe_kafka.KafkaProducer",
+                return_value=mock_producer,
+            ) as prod_cls,
+            patch(
+                "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
+                return_value=mock_consumer,
+            ) as cons_cls,
+        ):
             await backend._ensure_producer()
             await backend._ensure_consumer(group="g1")
 
@@ -260,13 +270,16 @@ class TestKafkaBackendAuthConfig:
         mock_producer = MagicMock()
         mock_consumer = MagicMock()
 
-        with patch(
-            "abe_plugin.backends.message_queue.service.abe_kafka.KafkaProducer",
-            return_value=mock_producer,
-        ) as prod_cls, patch(
-            "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
-            return_value=mock_consumer,
-        ) as cons_cls:
+        with (
+            patch(
+                "abe_plugin.backends.message_queue.service.abe_kafka.KafkaProducer",
+                return_value=mock_producer,
+            ) as prod_cls,
+            patch(
+                "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
+                return_value=mock_consumer,
+            ) as cons_cls,
+        ):
             await backend._ensure_producer()
             await backend._ensure_consumer(group=None)
 
