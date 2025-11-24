@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "abe-mq-template"
-version = "0.0.1"
-description = "📮 A message queue component plugin implementation for abstract backend library."
+name = "abe-kafka"
+version = "0.0.0"
+description = "🔗 A backend component as message queue component by Kafka."
 authors = [{ name = "Chisanan232", email = "chi10211201@cycu.org.tw" }]
 requires-python = ">=3.12,<3.14"
 readme = "README.md"
