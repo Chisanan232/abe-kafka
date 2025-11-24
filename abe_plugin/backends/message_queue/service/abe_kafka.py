@@ -9,7 +9,16 @@ import asyncio
 import json
 import logging
 import os
-from typing import Any, AsyncIterator, Dict, List, Optional, Callable, Awaitable, TypeVar
+from typing import (
+    Any,
+    AsyncIterator,
+    Awaitable,
+    Callable,
+    Dict,
+    List,
+    Optional,
+    TypeVar,
+)
 
 from abe.backends.message_queue.base.protocol import MessageQueueBackend
 from kafka import KafkaConsumer, KafkaProducer
