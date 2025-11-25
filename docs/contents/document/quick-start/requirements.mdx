@@ -6,7 +6,7 @@ sidebar_position: 1
 
 # Requirements
 
-Before developing a message queue service for your application, ensure your development environment meets the following requirements:
+Before using abe-kafka or contributing to this repository, ensure your environment meets the following requirements.
 
 ## System Requirements
 
@@ -17,10 +17,9 @@ Before developing a message queue service for your application, ensure your deve
 
 ## Core Prerequisites
 
-### Python Version
+### Python
 
-- **Python**: Version 3.12 or higher (up to 3.13 supported)
-- **Recommended**: Python 3.13 for optimal compatibility with async features
+- Versions supported: 3.12, 3.13
 
 :::tip Python Installation
 If you don't have Python installed:
@@ -29,9 +28,9 @@ If you don't have Python installed:
 - **Windows**: Download from [python.org](https://www.python.org/) or use `winget install Python.Python.3.13`
 :::
 
-### Package Manager: uv (Required)
+### Package Manager: uv (Recommended)
 
-This template is specifically designed for **[uv]** - a fast, modern Python package manager written in Rust.
+This project uses **[uv]** for fast, reproducible Python environments.
 
 **Installation:**
 ```bash
@@ -56,70 +55,36 @@ pip install uv
 ### Version Control
 
 - **Git**: Version 2.20 or higher
-- **GitHub Account**: For template creation and repository management (recommended)
 
-## Application Integration
+## Kafka & optional tools
 
-### Understanding the Target Application
+- Kafka broker: Not required for unit tests. Needed for real-cluster integration tests.
+- Docker: Optional. Used by Testcontainers-based integration test to spin up Kafka locally.
+- Node.js + pnpm: Optional. Only needed to build the documentation site.
 
-To develop message queue services, you should understand:
+## Python Dependencies
 
-- **Application Runtime**: The system that receives and dispatches events through your queue service
-- **MessageQueueBackend Protocol**: The interface your service must implement
-- **Plugin Discovery**: How the runtime finds and loads your message queue backend
+Installed automatically by `pip install abe-kafka` or `uv sync`:
 
-### Development Dependencies
+- `abstract-backend>=0.0.1`
+- `kafka-python>=2.0,<3`
 
-Your plugin will integrate with:
+## Development Tools
 
-```toml
-# Example: dependencies required by your application
-dependencies = [
-    "abstract-backend",  # Core runtime (replace with your application library)
-]
-```
+Used in this repository (see pyproject groups):
 
-## Message Queue Services (Optional)
+- pytest, pytest-asyncio, pytest-cov, pytest-rerunfailures
+- coverage
+- pre-commit, mypy, pylint
+- testcontainers[kafka]
 
-Depending on your queue backend implementation, you may need access to:
-
-### Local Development Services
-- **Redis**: `brew install redis` (macOS) or `apt install redis-server` (Linux)
-- **RabbitMQ**: `brew install rabbitmq` (macOS) or `apt install rabbitmq-server` (Linux)
-- **Docker**: For containerized queue services
-
-### Cloud Services
-- **AWS Account**: For SQS, SNS integration
-- **Google Cloud**: For Pub/Sub integration
-- **Azure Account**: For Service Bus integration
-
-## Development Tools (Auto-configured)
-
-These tools are automatically set up in the template:
-
-### Testing & Quality Assurance
-- **pytest**: Async-capable testing framework
-- **pytest-cov**: Code coverage reporting
-- **pytest-asyncio**: Async test support
-- **mypy**: Static type checking
-- **black**: Code formatting
-- **pylint**: Code linting
-
-### Documentation
-- **Docusaurus**: Documentation site generation
-- **API documentation**: Auto-generated from docstrings
-
-### CI/CD
-- **GitHub Actions**: Automated testing and publishing
-- **Pre-commit hooks**: Code quality enforcement
-
-## Environment Setup Verification
+## Verify your setup
 
 After installing the prerequisites, verify your setup:
 
 ```bash
 # Check Python version
-python --version  # Should be 3.12+
+python --version  # Should be 3.12 or 3.13
 
 # Check uv installation
 uv --version  # Should show uv version
@@ -127,12 +92,9 @@ uv --version  # Should show uv version
 # Check Git
 git --version  # Should be 2.20+
 
-# Verify you can create virtual environments
-uv venv test-env
-source test-env/bin/activate  # Linux/macOS
-# or test-env\Scripts\activate  # Windows
-deactivate
-rm -rf test-env
+# Sync dependencies and run unit tests
+uv sync
+uv run pytest -q -v test/unit_test
 ```
 
 ## Next Steps
