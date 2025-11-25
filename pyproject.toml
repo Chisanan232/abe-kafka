@@ -53,6 +53,7 @@ dev = [
     "aiohttp>=3.12.13",
     "pytest-asyncio>=0.23.0,<2",
     "python-dotenv>=1.0.1,<2",
+    "testcontainers[kafka]>=4,<5",
 ]
 pre-commit-ci = [
     "pre-commit>=3.5.0,<5",
