@@ -6,11 +6,11 @@ import os
 import queue
 import threading
 import time
+from types import SimpleNamespace
+from unittest.mock import MagicMock, patch
 from uuid import uuid4
 
 import pytest
-from types import SimpleNamespace
-from unittest.mock import MagicMock, patch
 
 from abe_plugin.backends.message_queue.service.abe_kafka import KafkaMessageQueueBackend
 
@@ -159,9 +159,9 @@ def test_publish_and_consume_roundtrip_sasl_plain_env_threads() -> None:
                 enable_auto_commit=False,
                 consumer_group_prefix="abe_it",
                 security_protocol=sec,  # type: ignore[arg-type]
-                sasl_mechanism=mech,    # type: ignore[arg-type]
-                sasl_username=user,     # type: ignore[arg-type]
-                sasl_password=pwd,      # type: ignore[arg-type]
+                sasl_mechanism=mech,  # type: ignore[arg-type]
+                sasl_username=user,  # type: ignore[arg-type]
+                sasl_password=pwd,  # type: ignore[arg-type]
             )
 
             async def run_consume() -> None:
@@ -182,9 +182,9 @@ def test_publish_and_consume_roundtrip_sasl_plain_env_threads() -> None:
             backend = KafkaMessageQueueBackend(
                 bootstrap_servers=[bootstrap],
                 security_protocol=sec,  # type: ignore[arg-type]
-                sasl_mechanism=mech,    # type: ignore[arg-type]
-                sasl_username=user,     # type: ignore[arg-type]
-                sasl_password=pwd,      # type: ignore[arg-type]
+                sasl_mechanism=mech,  # type: ignore[arg-type]
+                sasl_username=user,  # type: ignore[arg-type]
+                sasl_password=pwd,  # type: ignore[arg-type]
             )
 
             async def run_publish() -> None:
@@ -209,20 +209,25 @@ def test_publish_and_consume_roundtrip_sasl_plain_env_threads() -> None:
             {},
         )
         poll_iter = iter(poll_items)
+
         def fake_poll(timeout_ms: int = 1000):  # noqa: ANN001
             try:
                 return next(poll_iter)
             except StopIteration:
                 return {}
+
         mock_consumer.poll.side_effect = fake_poll
 
-        with patch(
-            "abe_plugin.backends.message_queue.service.abe_kafka.KafkaProducer",
-            return_value=mock_producer,
-        ) as prod_cls, patch(
-            "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
-            return_value=mock_consumer,
-        ) as cons_cls:
+        with (
+            patch(
+                "abe_plugin.backends.message_queue.service.abe_kafka.KafkaProducer",
+                return_value=mock_producer,
+            ) as prod_cls,
+            patch(
+                "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
+                return_value=mock_consumer,
+            ) as cons_cls,
+        ):
             t_cons = threading.Thread(target=consumer_target, name="kafka-consumer", daemon=True)
             t_prod = threading.Thread(target=producer_target, name="kafka-producer", daemon=True)
             t_cons.start()
@@ -329,9 +334,9 @@ def test_publish_and_consume_roundtrip_ssl_env_threads() -> None:
                 enable_auto_commit=False,
                 consumer_group_prefix="abe_it",
                 security_protocol=sec,  # type: ignore[arg-type]
-                ssl_cafile=cafile,      # type: ignore[arg-type]
+                ssl_cafile=cafile,  # type: ignore[arg-type]
                 ssl_certfile=certfile,  # type: ignore[arg-type]
-                ssl_keyfile=keyfile,    # type: ignore[arg-type]
+                ssl_keyfile=keyfile,  # type: ignore[arg-type]
             )
 
             async def run_consume() -> None:
@@ -352,9 +357,9 @@ def test_publish_and_consume_roundtrip_ssl_env_threads() -> None:
             backend = KafkaMessageQueueBackend(
                 bootstrap_servers=[bootstrap],
                 security_protocol=sec,  # type: ignore[arg-type]
-                ssl_cafile=cafile,      # type: ignore[arg-type]
+                ssl_cafile=cafile,  # type: ignore[arg-type]
                 ssl_certfile=certfile,  # type: ignore[arg-type]
-                ssl_keyfile=keyfile,    # type: ignore[arg-type]
+                ssl_keyfile=keyfile,  # type: ignore[arg-type]
             )
 
             async def run_publish() -> None:
@@ -378,20 +383,25 @@ def test_publish_and_consume_roundtrip_ssl_env_threads() -> None:
             {},
         )
         poll_iter = iter(poll_items)
+
         def fake_poll(timeout_ms: int = 1000):  # noqa: ANN001
             try:
                 return next(poll_iter)
             except StopIteration:
                 return {}
+
         mock_consumer.poll.side_effect = fake_poll
 
-        with patch(
-            "abe_plugin.backends.message_queue.service.abe_kafka.KafkaProducer",
-            return_value=mock_producer,
-        ) as prod_cls, patch(
-            "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
-            return_value=mock_consumer,
-        ) as cons_cls:
+        with (
+            patch(
+                "abe_plugin.backends.message_queue.service.abe_kafka.KafkaProducer",
+                return_value=mock_producer,
+            ) as prod_cls,
+            patch(
+                "abe_plugin.backends.message_queue.service.abe_kafka.KafkaConsumer",
+                return_value=mock_consumer,
+            ) as cons_cls,
+        ):
             t_cons = threading.Thread(target=consumer_target, name="kafka-consumer", daemon=True)
             t_prod = threading.Thread(target=producer_target, name="kafka-producer", daemon=True)
             t_cons.start()
