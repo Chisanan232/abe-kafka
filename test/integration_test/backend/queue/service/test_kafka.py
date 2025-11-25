@@ -17,7 +17,7 @@ from abe_plugin.backends.message_queue.service.abe_kafka import KafkaMessageQueu
 
 def _docker_available() -> bool:
     try:
-        import docker  # type: ignore
+        import docker
 
         client = docker.from_env()
         client.ping()
@@ -33,7 +33,7 @@ pytestmark = pytest.mark.skipif(
 
 
 def test_publish_and_consume_roundtrip_with_testcontainers_threads() -> None:
-    from testcontainers.kafka import KafkaContainer  # type: ignore
+    from testcontainers.kafka import KafkaContainer
 
     topic = f"abe_kafka_it_{uuid4().hex}"
     pattern = f"^{topic}$"
@@ -143,6 +143,7 @@ def test_publish_and_consume_roundtrip_sasl_plain_env_threads() -> None:
     pattern = f"^{topic}$"
     payload = {"it": True, "id": uuid4().hex}
 
+    assert bootstrap_env
     bootstrap = bootstrap_env.split(",")[0].strip()
     if "://" in bootstrap:
         bootstrap = bootstrap.split("://", 1)[1]
@@ -159,9 +160,9 @@ def test_publish_and_consume_roundtrip_sasl_plain_env_threads() -> None:
                 enable_auto_commit=False,
                 consumer_group_prefix="abe_it",
                 security_protocol=sec,  # type: ignore[arg-type]
-                sasl_mechanism=mech,  # type: ignore[arg-type]
-                sasl_username=user,  # type: ignore[arg-type]
-                sasl_password=pwd,  # type: ignore[arg-type]
+                sasl_mechanism=mech,
+                sasl_username=user,
+                sasl_password=pwd,
             )
 
             async def run_consume() -> None:
@@ -182,9 +183,9 @@ def test_publish_and_consume_roundtrip_sasl_plain_env_threads() -> None:
             backend = KafkaMessageQueueBackend(
                 bootstrap_servers=[bootstrap],
                 security_protocol=sec,  # type: ignore[arg-type]
-                sasl_mechanism=mech,  # type: ignore[arg-type]
-                sasl_username=user,  # type: ignore[arg-type]
-                sasl_password=pwd,  # type: ignore[arg-type]
+                sasl_mechanism=mech,
+                sasl_username=user,
+                sasl_password=pwd,
             )
 
             async def run_publish() -> None:
@@ -204,7 +205,7 @@ def test_publish_and_consume_roundtrip_sasl_plain_env_threads() -> None:
         mock_producer.send.return_value = mock_future
 
         mock_consumer = MagicMock()
-        poll_items = (
+        poll_items = (  # type: ignore[var-annotated]
             {"tp": [SimpleNamespace(value=json.dumps(payload).encode("utf-8"))]},
             {},
         )
@@ -318,7 +319,7 @@ def test_publish_and_consume_roundtrip_ssl_env_threads() -> None:
     pattern = f"^{topic}$"
     payload = {"it": True, "id": uuid4().hex}
 
-    bootstrap = bootstrap_env.split(",")[0].strip()
+    bootstrap = bootstrap_env.split(",")[0].strip()  # type: ignore[union-attr]
     if "://" in bootstrap:
         bootstrap = bootstrap.split("://", 1)[1]
 
@@ -334,9 +335,9 @@ def test_publish_and_consume_roundtrip_ssl_env_threads() -> None:
                 enable_auto_commit=False,
                 consumer_group_prefix="abe_it",
                 security_protocol=sec,  # type: ignore[arg-type]
-                ssl_cafile=cafile,  # type: ignore[arg-type]
-                ssl_certfile=certfile,  # type: ignore[arg-type]
-                ssl_keyfile=keyfile,  # type: ignore[arg-type]
+                ssl_cafile=cafile,
+                ssl_certfile=certfile,
+                ssl_keyfile=keyfile,
             )
 
             async def run_consume() -> None:
@@ -357,9 +358,9 @@ def test_publish_and_consume_roundtrip_ssl_env_threads() -> None:
             backend = KafkaMessageQueueBackend(
                 bootstrap_servers=[bootstrap],
                 security_protocol=sec,  # type: ignore[arg-type]
-                ssl_cafile=cafile,  # type: ignore[arg-type]
-                ssl_certfile=certfile,  # type: ignore[arg-type]
-                ssl_keyfile=keyfile,  # type: ignore[arg-type]
+                ssl_cafile=cafile,
+                ssl_certfile=certfile,
+                ssl_keyfile=keyfile,
             )
 
             async def run_publish() -> None:
@@ -378,7 +379,7 @@ def test_publish_and_consume_roundtrip_ssl_env_threads() -> None:
         mock_producer.send.return_value = mock_future
 
         mock_consumer = MagicMock()
-        poll_items = (
+        poll_items = (  # type: ignore[var-annotated]
             {"tp": [SimpleNamespace(value=json.dumps(payload).encode("utf-8"))]},
             {},
         )
