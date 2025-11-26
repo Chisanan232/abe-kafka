@@ -15,30 +15,50 @@ This guide shows how to run the abe-kafka backend locally for quick validation a
 
 ## 1) Configure environment
 
-Minimal configuration (PLAINTEXT):
+<Tabs>
+  <TabItem value="bash" label="macOS/Linux (bash/zsh)" default>
 
-```bash
-export MESSAGE_QUEUE_BACKEND=kafka
-export KAFKA_BOOTSTRAP_SERVERS=localhost:9092
-```
+  ```bash
+  # Minimal (PLAINTEXT)
+  export MESSAGE_QUEUE_BACKEND=kafka
+  export KAFKA_BOOTSTRAP_SERVERS=localhost:9092
 
-SASL/PLAIN example:
+  # SASL/PLAIN
+  export KAFKA_SECURITY_PROTOCOL=SASL_PLAINTEXT
+  export KAFKA_SASL_MECHANISM=PLAIN
+  export KAFKA_SASL_USERNAME=my-user
+  export KAFKA_SASL_PASSWORD=my-pass
 
-```bash
-export KAFKA_SECURITY_PROTOCOL=SASL_PLAINTEXT
-export KAFKA_SASL_MECHANISM=PLAIN
-export KAFKA_SASL_USERNAME=my-user
-export KAFKA_SASL_PASSWORD=my-pass
-```
+  # SSL
+  export KAFKA_SECURITY_PROTOCOL=SSL
+  export KAFKA_SSL_CAFILE=/etc/ssl/ca.pem
+  export KAFKA_SSL_CERTFILE=/etc/ssl/cert.pem
+  export KAFKA_SSL_KEYFILE=/etc/ssl/key.pem
+  ```
 
-SSL example:
+  </TabItem>
+  <TabItem value="powershell" label="Windows (PowerShell)">
 
-```bash
-export KAFKA_SECURITY_PROTOCOL=SSL
-export KAFKA_SSL_CAFILE=/etc/ssl/ca.pem
-export KAFKA_SSL_CERTFILE=/etc/ssl/cert.pem
-export KAFKA_SSL_KEYFILE=/etc/ssl/key.pem
-```
+  ```powershell
+  # Minimal (PLAINTEXT)
+  $env:MESSAGE_QUEUE_BACKEND = "kafka"
+  $env:KAFKA_BOOTSTRAP_SERVERS = "localhost:9092"
+
+  # SASL/PLAIN
+  $env:KAFKA_SECURITY_PROTOCOL = "SASL_PLAINTEXT"
+  $env:KAFKA_SASL_MECHANISM = "PLAIN"
+  $env:KAFKA_SASL_USERNAME = "my-user"
+  $env:KAFKA_SASL_PASSWORD = "my-pass"
+
+  # SSL
+  $env:KAFKA_SECURITY_PROTOCOL = "SSL"
+  $env:KAFKA_SSL_CAFILE = "/etc/ssl/ca.pem"
+  $env:KAFKA_SSL_CERTFILE = "/etc/ssl/cert.pem"
+  $env:KAFKA_SSL_KEYFILE = "/etc/ssl/key.pem"
+  ```
+
+  </TabItem>
+</Tabs>
 
 ## 2) Publish and consume sample
 

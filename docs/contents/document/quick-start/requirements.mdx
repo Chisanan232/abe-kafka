@@ -4,6 +4,11 @@ title: Requirements
 sidebar_position: 1
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 # Requirements
 
 Before using abe-kafka or contributing to this repository, ensure your environment meets the following requirements.
@@ -33,16 +38,32 @@ If you don't have Python installed:
 This project uses **[uv]** for fast, reproducible Python environments.
 
 **Installation:**
-```bash
-# macOS and Linux
-curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Windows
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+<Tabs>
+  <TabItem value="macos-linux" label="macOS/Linux" default>
 
-# Alternative: via pip
-pip install uv
-```
+  ```bash
+  # Install script
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  ```
+
+  </TabItem>
+  <TabItem value="windows" label="Windows">
+
+  ```powershell
+  # Install script
+  powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+  ```
+
+  </TabItem>
+  <TabItem value="pip" label="pip (alt)">
+
+  ```bash
+  pip install uv
+  ```
+
+  </TabItem>
+</Tabs>
 
 **Why uv?**
 - ⚡ **10-100x faster** than pip/poetry for dependency resolution

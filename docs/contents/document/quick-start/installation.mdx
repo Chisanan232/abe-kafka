@@ -22,36 +22,84 @@ This page shows how to install and enable the Kafka backend in your environment.
 
 ## 1) Install the package
 
-```bash
-pip install abe-kafka
-# or
-uv add abe-kafka
-```
+<Tabs>
+  <TabItem value="uv" label="uv (recommended)" default>
+
+  ```bash
+  uv add abe-kafka
+  ```
+
+  </TabItem>
+  <TabItem value="pip" label="pip">
+
+  ```bash
+  pip install abe-kafka
+  ```
+
+  </TabItem>
+</Tabs>
 
 ## 2) Enable the Kafka backend
 
 Set the entry-point backend name and minimal configuration:
 
-```bash
-export MESSAGE_QUEUE_BACKEND=kafka
-export KAFKA_BOOTSTRAP_SERVERS=localhost:9092
-```
+<Tabs>
+  <TabItem value="bash" label="macOS/Linux (bash/zsh)" default>
+
+  ```bash
+  export MESSAGE_QUEUE_BACKEND=kafka
+  export KAFKA_BOOTSTRAP_SERVERS=localhost:9092
+  ```
+
+  </TabItem>
+  <TabItem value="powershell" label="Windows (PowerShell)">
+
+  ```powershell
+  $env:MESSAGE_QUEUE_BACKEND = "kafka"
+  $env:KAFKA_BOOTSTRAP_SERVERS = "localhost:9092"
+  ```
+
+  </TabItem>
+</Tabs>
 
 Optional security configuration:
 
-```bash
-# SASL/PLAIN
-export KAFKA_SECURITY_PROTOCOL=SASL_PLAINTEXT
-export KAFKA_SASL_MECHANISM=PLAIN
-export KAFKA_SASL_USERNAME=my-user
-export KAFKA_SASL_PASSWORD=my-pass
+<Tabs>
+  <TabItem value="bash" label="macOS/Linux (bash/zsh)" default>
 
-# SSL
-export KAFKA_SECURITY_PROTOCOL=SSL
-export KAFKA_SSL_CAFILE=/etc/ssl/ca.pem
-export KAFKA_SSL_CERTFILE=/etc/ssl/cert.pem
-export KAFKA_SSL_KEYFILE=/etc/ssl/key.pem
-```
+  ```bash
+  # SASL/PLAIN
+  export KAFKA_SECURITY_PROTOCOL=SASL_PLAINTEXT
+  export KAFKA_SASL_MECHANISM=PLAIN
+  export KAFKA_SASL_USERNAME=my-user
+  export KAFKA_SASL_PASSWORD=my-pass
+
+  # SSL
+  export KAFKA_SECURITY_PROTOCOL=SSL
+  export KAFKA_SSL_CAFILE=/etc/ssl/ca.pem
+  export KAFKA_SSL_CERTFILE=/etc/ssl/cert.pem
+  export KAFKA_SSL_KEYFILE=/etc/ssl/key.pem
+  ```
+
+  </TabItem>
+  <TabItem value="powershell" label="Windows (PowerShell)">
+
+  ```powershell
+  # SASL/PLAIN
+  $env:KAFKA_SECURITY_PROTOCOL = "SASL_PLAINTEXT"
+  $env:KAFKA_SASL_MECHANISM = "PLAIN"
+  $env:KAFKA_SASL_USERNAME = "my-user"
+  $env:KAFKA_SASL_PASSWORD = "my-pass"
+
+  # SSL
+  $env:KAFKA_SECURITY_PROTOCOL = "SSL"
+  $env:KAFKA_SSL_CAFILE = "/etc/ssl/ca.pem"
+  $env:KAFKA_SSL_CERTFILE = "/etc/ssl/cert.pem"
+  $env:KAFKA_SSL_KEYFILE = "/etc/ssl/key.pem"
+  ```
+
+  </TabItem>
+</Tabs>
 
 ## 2.5) Start a local Kafka broker (quick options)
 
