@@ -9,7 +9,6 @@ const sidebars: SidebarsConfig = {
     'requirements',
     'workflow',
     'coding-style',
-    'architecture',
     {
       type: 'category',
       label: 'CI/CD Workflows',
