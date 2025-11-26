@@ -1,0 +1,77 @@
+---
+slug: project-origin
+title: Kafka Message Queue Backend - Extending abstract-backend with Kafka Support
+authors: [chisanan232]
+tags: [kafka, message-queue, plugin, python, abe-kafka, abstract-backend]
+description: Why I built abe-kafka and how it extends Abstract Backend with a production-ready Kafka message queue backend.
+---
+
+# Kafka Message Queue Backend - Extending abstract-backend with Kafka Support
+
+<!-- truncate -->
+
+As a developer working with component-based architectures, I recognized a familiar need: adding a robust Kafka backend to systems that discover and load components at runtime via entry points (like abstract-backend).
+
+abe-kafka exists to provide a production-ready Kafka integration that you can plug into any compatible system with minimal configuration.
+
+## The Problem: Limited Backend Options
+
+Many projects rely on a generic message queue interface but only ship one or two concrete implementations. Teams who need Kafka end up writing custom glue code repeatedly — or compromising on features and operability.
+
+## The Solution: Universal Kafka Backend Component
+
+abe-kafka implements a Kafka backend that:
+
+- Aligns with the MessageQueueBackend protocol used by abstract-backend style systems.
+- Loads via entry points so it can be discovered dynamically at runtime.
+- Supports PLAINTEXT, SASL/PLAIN, and SSL out of the box.
+- Uses JSON serialization for straightforward publish/consume flows.
+
+## Built for Component-Based Architectures
+
+If your application selects components by name (e.g., `MESSAGE_QUEUE_BACKEND=kafka`), abe-kafka slots in without invasive changes. Configuration is environment-first, making it a good fit for containers and CI/CD pipelines.
+
+## Real Impact: Extending Backend Capabilities
+
+- Before: Teams wrote one-off Kafka integrations, with inconsistent configuration and testing approaches.
+- After: A reusable, tested Kafka backend that standardizes configuration and behavior across projects.
+
+## Quick Start
+
+```bash
+# Install (choose one)
+pip install abe-kafka
+# or
+uv add abe-kafka
+
+# Minimal environment
+export MESSAGE_QUEUE_BACKEND=kafka
+export KAFKA_BOOTSTRAP_SERVERS=localhost:9092
+```
+
+```python
+import asyncio
+from abe_plugin.backends.message_queue.service.abe_kafka import KafkaMessageQueueBackend
+
+async def main():
+    backend = KafkaMessageQueueBackend.from_env()
+    await backend.publish("demo-topic", {"hello": "world"})
+    async for msg in backend.consume(group="g1"):
+        print("received:", msg)
+        break
+    await backend.close()
+
+asyncio.run(main())
+```
+
+See the Installation and How to Run guides in the docs for SASL/SSL examples and local Kafka options (Docker Compose or Testcontainers).
+
+## Project Goals
+
+- Provide a first-class Kafka backend that is easy to adopt.
+- Keep configuration simple and environment-driven.
+- Ensure reliability with integration tests and practical examples.
+
+## The Journey Continues
+
+Feedback and contributions are welcome. If you use abstract-backend style architectures and want rock-solid Kafka support, give abe-kafka a try!
