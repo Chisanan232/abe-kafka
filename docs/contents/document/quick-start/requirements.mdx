@@ -69,15 +69,6 @@ Installed automatically by `pip install abe-kafka` or `uv sync`:
 - `abstract-backend>=0.0.1`
 - `kafka-python>=2.0,<3`
 
-## Development Tools
-
-Used in this repository (see pyproject groups):
-
-- pytest, pytest-asyncio, pytest-cov, pytest-rerunfailures
-- coverage
-- pre-commit, mypy, pylint
-- testcontainers[kafka]
-
 ## Verify your setup
 
 After installing the prerequisites, verify your setup:
@@ -92,9 +83,17 @@ uv --version  # Should show uv version
 # Check Git
 git --version  # Should be 2.20+
 
-# Sync dependencies and run unit tests
+# Sync dependencies (optional if using pip install)
 uv sync
-uv run pytest -q -v test/unit_test
+
+---
+
+### For contributors
+
+If you plan to develop or run tests, see:
+
+- Development requirements: ../../development/requirements.mdx
+- Workflow and running tests: ../../development/workflow.mdx
 ```
 
 ## Next Steps

@@ -6,94 +6,27 @@ sidebar_position: 2
 
 # Quick Start
 
-This guide shows how to install, configure, and validate abe-kafka quickly.
+This page gives you the shortest path to get started. For details, jump to the subpages.
 
-## 1) Install
+## 1) Check requirements
+
+- See: [Requirements](./requirements)
+
+## 2) Install and enable
 
 ```bash
 pip install abe-kafka
-# or
-uv add abe-kafka
-```
-
-## 2) Configure
-
-Minimal (PLAINTEXT):
-
-```bash
 export MESSAGE_QUEUE_BACKEND=kafka
 export KAFKA_BOOTSTRAP_SERVERS=localhost:9092
 ```
 
-SASL/PLAIN:
+For SASL/SSL examples and more options, see: [Installation](./installation)
 
-```bash
-export KAFKA_SECURITY_PROTOCOL=SASL_PLAINTEXT
-export KAFKA_SASL_MECHANISM=PLAIN
-export KAFKA_SASL_USERNAME=my-user
-export KAFKA_SASL_PASSWORD=my-pass
-```
+## 3) Validate locally
 
-SSL:
+- Run the minimal publish/consume example here: [How to Run](./how-to-run)
 
-```bash
-export KAFKA_SECURITY_PROTOCOL=SSL
-export KAFKA_SSL_CAFILE=/etc/ssl/ca.pem
-export KAFKA_SSL_CERTFILE=/etc/ssl/cert.pem
-export KAFKA_SSL_KEYFILE=/etc/ssl/key.pem
-```
-
-## 3) Publish and consume
-
-```python
-import asyncio
-from abe_plugin.backends.message_queue.service.abe_kafka import KafkaMessageQueueBackend
-
-async def main():
-    backend = KafkaMessageQueueBackend.from_env()
-    await backend.publish("demo-topic", {"hello": "world"})
-    async for msg in backend.consume(group="g1"):
-        print("received:", msg)
-        break
-    await backend.close()
-
-asyncio.run(main())
-```
-
-## 4) Integration tests
-
-Testcontainers (Docker required):
-
-```bash
-uv run pytest -q -v -k test_publish_and_consume_roundtrip_with_testcontainers_threads test/integration_test/backend/queue/service/test_kafka.py
-```
-
-Real cluster (SASL/SSL):
-
-```bash
-# SASL/PLAIN
-export KAFKA_IT_BOOTSTRAP_SERVERS=broker1:9092,broker2:9092
-export KAFKA_IT_SECURITY_PROTOCOL=SASL_PLAINTEXT
-export KAFKA_IT_SASL_MECHANISM=PLAIN
-export KAFKA_IT_SASL_USERNAME=my-user
-export KAFKA_IT_SASL_PASSWORD=my-pass
-
-# SSL
-export KAFKA_IT_SECURITY_PROTOCOL=SSL
-export KAFKA_IT_SSL_CAFILE=/etc/ssl/ca.pem
-export KAFKA_IT_SSL_CERTFILE=/etc/ssl/cert.pem
-export KAFKA_IT_SSL_KEYFILE=/etc/ssl/key.pem
-
-uv run pytest -q -v test/integration_test
-```
-
-## 5) Troubleshooting
-
-- Testcontainers bootstrap may include a scheme (e.g., `PLAINTEXT://`); abe-kafka normalises this automatically.
-- Use `auto_offset_reset=earliest` with a fresh consumer group to consume from offset 0.
-- Ensure broker `advertised.listeners` is reachable from your machine (localhost vs container network).
-
-## 6) Learn more
+## Where to go next
 
 - Configuration and behavior: [Kafka Backend](../api-references/kafka-backend)
 - Public API: [API References](../api-references)

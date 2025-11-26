@@ -87,23 +87,15 @@ asyncio.run(main())
   - `consume()` polls in a thread and yields decoded JSON payloads
   - `_with_retry[T]` provides bounded exponential backoff for transient failures
 
-## Integration testing
+---
 
-- Testcontainers path (Docker): spins up Kafka automatically and validates round-trip.
-- Real cluster path (SASL/SSL):
-  - Set env like `KAFKA_IT_BOOTSTRAP_SERVERS`, `KAFKA_IT_SECURITY_PROTOCOL`, and SASL/SSL vars.
-  - Tests run with a 3-thread model (main/producer/consumer) to avoid deadlocks.
-  - If env is missing, tests switch to mocked mode and still validate configuration.
+### For contributors
 
-Commands
+If you plan to develop or contribute, see the Development section for testing, CI, and coding standards:
 
-- Run integration tests: `uv run pytest -q -v test/integration_test`
-- Run unit tests: `uv run pytest -q -v test/unit_test`
-
-## Type checking and CI
-
-- mypy configured via `mypy.ini`. Run: `uv run pre-commit run mypy --all-files`.
-- GitHub Actions run tests and type checks across supported Python versions.
+- Development overview: ../../development/index.mdx
+- Workflow and running tests: ../../development/workflow.mdx
+- CI/CD details: ../../development/ci-cd/index.mdx
 
 ## Compatibility
 

@@ -57,43 +57,16 @@ async def main():
 asyncio.run(main())
 ```
 
-## 3) Integration tests
-
-### Testcontainers (Docker required)
-
-```bash
-uv run pytest -q -v -k test_publish_and_consume_roundtrip_with_testcontainers_threads test/integration_test/backend/queue/service/test_kafka.py
-```
-
-### Real cluster (SASL/SSL)
-
-Set the environment variables:
-
-```bash
-# SASL/PLAIN
-export KAFKA_IT_BOOTSTRAP_SERVERS=broker1:9092,broker2:9092
-export KAFKA_IT_SECURITY_PROTOCOL=SASL_PLAINTEXT
-export KAFKA_IT_SASL_MECHANISM=PLAIN
-export KAFKA_IT_SASL_USERNAME=my-user
-export KAFKA_IT_SASL_PASSWORD=my-pass
-
-# SSL
-export KAFKA_IT_SECURITY_PROTOCOL=SSL
-export KAFKA_IT_SSL_CAFILE=/etc/ssl/ca.pem
-export KAFKA_IT_SSL_CERTFILE=/etc/ssl/cert.pem
-export KAFKA_IT_SSL_KEYFILE=/etc/ssl/key.pem
-```
-
-Run all integration tests:
-
-```bash
-uv run pytest -q -v test/integration_test
-```
-
-Note: If env vars are not set, SASL/SSL tests run in mocked mode verifying configuration.
-
-## 4) Common tips
+## Tips
 
 - If Testcontainers returns `PLAINTEXT://host:port`, the backend normalizes to `host:port`.
 - Use `auto_offset_reset=earliest` with a fresh group to consume from offset 0.
 - Ensure broker `advertised.listeners` is reachable from your client (localhost vs container network).
+
+---
+
+### For contributors
+
+For test suites and advanced workflows, see:
+
+- Development workflow: ../../development/workflow.mdx

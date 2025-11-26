@@ -73,14 +73,17 @@ async def main_wrapper():
 asyncio.run(main_wrapper())
 ```
 
-## Testing
-
-- Unit tests (mocks): `uv run pytest -q -v test/unit_test`
-- Integration (Docker/Testcontainers): `uv run pytest -q -v -k test_publish_and_consume_roundtrip_with_testcontainers_threads test/integration_test/backend/queue/service/test_kafka.py`
-- Integration (SASL/SSL real cluster): set `KAFKA_IT_*` env vars, then `uv run pytest -q -v test/integration_test`
-
 ## Troubleshooting
 
  - Testcontainers may return `PLAINTEXT://host:port`; abe-kafka normalises to `host:port`.
  - If topics are not auto-created on your broker, create them or publish before consuming with `auto_offset_reset=earliest`.
  - On macOS, ensure advertised listeners resolve from the client (IPv4/IPv6).
+
+---
+
+### For contributors
+
+For repository tests and CI workflows, see:
+
+- Development workflow: ../../development/workflow.mdx
+- CI/CD details: ../../development/ci-cd/index.mdx
